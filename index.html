@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cronómetro y Cuenta Atrás</title>
+  <style>
+    /* Estilos generales */
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f0f0f0;
+      text-align: center;
+      transition: background-image 0.5s ease;
+    }
+
+    h1 {
+      margin-top: 30px;
+    }
+
+    /* Contenedor principal */
+    .container {
+      margin: 30px auto;
+      width: 700px;
+      max-width: 90%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* Recuadro principal para el tiempo */
+    #time-display {
+      position: relative;
+      width: 700px;
+      height: 180px;
+      background-color: #E6EEFF;   /* color claro de fondo */
+      border: 10px solid #2F2F2F;     /* borde grueso gris cemento */
+      border-radius: 50px;         /* esquinas redondeadas */
+      margin-bottom: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* Contenedor de horas, minutos y segundos en una sola línea */
+    #time-text {
+      font-size: 9rem;     /* Tamaño grande para los dígitos principales */
+      font-weight: bold;
+      display: flex;
+      align-items: baseline;
+      gap: 5px;
+    }
+
+    /* Ajustes para horas, minutos, segundos */
+    #hours, #minutes, #seconds {
+      display: inline-block;
+    }
+
+    /* Milisegundos debajo de los segundos, tamaño menor */
+    #milliseconds {
+      position: absolute;
+      bottom: 3px;
+      right: 40px;
+      font-size: 2rem;   /* Menor que las horas/min/seg */
+      font-weight: normal;
+    }
+
+    /* Contenedor de botones */
+    .buttons {
+      display: flex;
+      gap: 50px;
+      margin-bottom: 50px;
+      justify-content:space-between ;
+    }
+
+    /* Botones Start y Clear */
+    button {
+      width: 300px;
+      height: 120px;
+      font-size: 3rem;
+      font-weight: bold;
+      border: 6px solid #2F2F2F;
+      border-radius: 14px;
+      cursor: pointer;
+    }
+
+    #start-btn {
+      background-color: #00FF00; /* verde lima */
+      color: #000;
+    }
+
+    #clear-btn {
+      background-color: #FF2400; /* rojo escarlata */
+      color: #000;
+    }
+
+    /* Reprogramar el tiempo */
+    .reprogram {
+      margin: 10px 0;
+      font-size: 1rem;
+    }
+    .reprogram label {
+      color: #FFD700; /* Color dorado para mejor visibilidad en la animación */
+      font-weight: bold;
+    }
+    .reprogram input {
+      width: 60px;
+      text-align: center;
+      padding: 5px;
+      font-size: 1rem;
+      margin-left: 10px;
+    }
+    
+    /* Estilos para el indicador de modo */
+    .mode-indicator {
+      margin-top: 20px;
+      font-size: 1.5rem;
+      font-weight: bold;
+      padding: 10px;
+      background-color: rgba(0, 0, 0, 0.7);
+      color: white;
+      border-radius: 10px;
+      display: inline-block;
+    }
+    
+    #current-mode {
+      color: #FF1493; /* Color rosa brillante */
+      text-shadow: 0 0 5px #fff, 0 0 10px #fff; /* Efecto de brillo */
+      font-weight: bold;
+      font-size: 1.7rem;
+    }
+  </style>
+</head>
+<body>
+  <h1>Cronómetro y Cuenta Atrás</h1>
+  <div class="container">
+    <!-- Display con HH:MM:SS y milisegundos -->
+    <div id="time-display">
+      <!-- Contenedor para las horas, minutos y segundos -->
+      <div id="time-text">
+        <span id="hours">00</span>:
+        <span id="minutes">08</span>:
+        <span id="seconds">00</span>
+      </div>
+      <span id="milliseconds">000</span>
+    </div>
+
+    <!-- Botones Start y Clear -->
+    <div class="buttons">
+      <button id="start-btn">Start</button>
+      <button id="clear-btn">Clear</button>
+    </div>
+
+    <!-- Campo para reprogramar los minutos antes de pulsar Start -->
+    <div class="reprogram">
+      <label for="reprogram-mins">Reprogramar (min):</label>
+      <input type="number" id="reprogram-mins" min="1" placeholder="Minutos"/>
+    </div>
+    <!-- Checkbox para seleccionar el modo de conteo -->
+    <div class="reprogram">
+      <label>
+        <input type="checkbox" id="forward-mode"> Conteo hacia adelante (stopwatch)
+      </label>
+    </div>
+  </div>
+  <div class="mode-indicator">
+    Modo actual: <span id="current-mode">Cuenta Regresiva</span>
+  </div>
+
+  <!-- Lógica en script.js -->
+  <script src="script.js"></script>
+</body>
+</html>
+
